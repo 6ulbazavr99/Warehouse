@@ -2,9 +2,9 @@ import sys
 import asyncio
 import logging
 import contextlib
-
 import asyncpg
 from decouple import config
+
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
@@ -19,6 +19,7 @@ from core.middlewares.dbmiddleware import DbSession
 from core.utils.statesform import StepsForm
 from core.utils.commands import set_commands
 from core.utils.dbconnect import create_database_table
+
 
 token = config('BOT_TOKEN')
 admin = config('ADMIN')
@@ -66,7 +67,6 @@ async def start():
     dp.message.register(get_quantity_withdrawal, StepsForm.GET_QUANTITY_WITH)
     dp.message.register(get_export_excel_file, Command(commands='file'))
 
-
     try:
         await dp.start_polling(bot)
     finally:
@@ -76,3 +76,12 @@ async def start():
 if __name__ == '__main__':
     with contextlib.suppress(KeyboardInterrupt, SystemExit):
         asyncio.run(start())
+
+
+# TODO: рефакт +
+# TODO: понять
+# TODO: рефакт
+# TODO: дополнить
+# TODO: структурировать
+# TODO: тест
+# TODO: рефакт

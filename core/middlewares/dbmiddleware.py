@@ -1,10 +1,7 @@
 import asyncpg
-
 from typing import Dict, Any, Callable, Awaitable
-
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
-
 from core.utils.dbconnect import Request
 
 

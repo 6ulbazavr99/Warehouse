@@ -1,11 +1,10 @@
 from decouple import config
-
 from typing import Dict, Any, Callable, Awaitable
-
 from aiogram import BaseMiddleware, Bot
 from aiogram.types import Message
 from aiogram.dispatcher.flags import get_flag
 from aiogram.utils.chat_action import ChatActionSender
+
 
 token = config('BOT_TOKEN')
 bot = Bot(token=token, parse_mode='HTML')

@@ -1,17 +1,18 @@
 from decouple import config
-
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.markdown import hbold
 from aiogram.fsm.context import FSMContext
-
 from core.utils.statesform import StepsForm
 
+
 enter_token = config('ENTER_TOKEN')
+
 
 button_add = KeyboardButton(text='/add')
 button_list = KeyboardButton(text='/list')
 button_withdrawal = KeyboardButton(text='/withdrawal')
 button_file = KeyboardButton(text='/file')
+
 
 keyboard = ReplyKeyboardMarkup(
     keyboard=[

@@ -1,6 +1,5 @@
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-
 from core.utils.statesform import StepsForm
 from core.utils.dbconnect import Request
 
@@ -27,8 +26,6 @@ async def get_quantity(message: Message, state: FSMContext, request: Request):
     code = int(context_data.get('code'))
     name = context_data.get('name')
     await request.add_product(code, name, message.text)
-
     data = f'Товар с кодом "{code}" успешно добавлен.'
     await message.answer(data)
-
     await state.clear()
