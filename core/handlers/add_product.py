@@ -6,7 +6,7 @@ from core.utils.db_connect import Request
 
 
 async def add_product(message: Message, state: FSMContext):
-    await message.answer(f'Введите код товара (код должен состоять только из целых чисел)')
+    await message.answer(f'Введите код товара (код должен состоять из целых чисел)')
     await state.set_state(StepsForm.GET_CODE)
 
 

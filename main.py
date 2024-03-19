@@ -8,6 +8,7 @@ from decouple import config
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
+from aiogram.types import Message
 
 from core.handlers.basic import get_start, get_token, get_help
 from core.handlers.add_product import add_product, get_code, get_name, get_quantity
@@ -25,6 +26,15 @@ from core.utils.db_connect import create_database_table
 
 token = config('BOT_TOKEN')
 admin = config('ADMIN_ID')
+
+
+async def get_user(message: Message):
+    user_username = message.from_user.username
+    user_id = message.from_user.id
+    print('\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+    print("Имя пользователя:", user_username)
+    print("ID пользователя:", user_id)
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
 
 
 async def start_bot(bot: Bot):
@@ -57,6 +67,7 @@ async def start():
     dp.update.middleware.register(DbSession(pool_connect))
     dp.message.middleware.register(ExampleChatActionMiddleware())
 
+    # dp.message.register(get_user)
     # dp.startup.register(start_bot)
     # dp.shutdown.register(stop_bot)
 

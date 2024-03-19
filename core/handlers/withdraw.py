@@ -6,7 +6,7 @@ from core.utils.db_connect import Request
 
 
 async def get_withdraw(message: Message, state: FSMContext):
-    await message.answer(f'Введите код товара для вычета (код должен быть только целым числом)')
+    await message.answer(f'Введите код товара для вычета (код должен состоять из целых чисел)')
     await state.set_state(StepsForm.GET_CODE_WITH)
 
 
