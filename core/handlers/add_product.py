@@ -1,11 +1,12 @@
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-from core.utils.statesform import StepsForm
-from core.utils.dbconnect import Request
+
+from core.utils.states_form import StepsForm
+from core.utils.db_connect import Request
 
 
 async def add_product(message: Message, state: FSMContext):
-    await message.answer(f'Введите код товара (код должен быть только целым числом)')
+    await message.answer(f'Введите код товара (код должен состоять только из целых чисел)')
     await state.set_state(StepsForm.GET_CODE)
 
 
@@ -15,7 +16,7 @@ async def get_code(message: Message, state: FSMContext):
     await state.set_state(StepsForm.GET_NAME_PR)
 
 
-async def get_name_product(message: Message, state: FSMContext):
+async def get_name(message: Message, state: FSMContext):
     await message.answer(f'Название товара: {message.text}\r\nТеперь введите количество')
     await state.update_data(name=message.text)
     await state.set_state(StepsForm.GET_QUANTITY)

@@ -1,8 +1,10 @@
 from decouple import config
+
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.markdown import hbold
 from aiogram.fsm.context import FSMContext
-from core.utils.statesform import StepsForm
+
+from core.utils.states_form import StepsForm
 
 
 enter_token = config('ENTER_TOKEN')
@@ -10,13 +12,13 @@ enter_token = config('ENTER_TOKEN')
 
 button_add = KeyboardButton(text='/add')
 button_list = KeyboardButton(text='/list')
-button_withdrawal = KeyboardButton(text='/withdrawal')
-button_file = KeyboardButton(text='/file')
+button_withdraw = KeyboardButton(text='/withdraw')
+button_file = KeyboardButton(text='/excel')
 
 
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
-        [button_add], [button_list], [button_withdrawal], [button_file]
+        [button_add], [button_list], [button_withdraw], [button_file]
     ],
     resize_keyboard=True
 )
@@ -24,11 +26,11 @@ keyboard = ReplyKeyboardMarkup(
 
 async def get_start(message: Message, state: FSMContext):
     await message.answer(f'Добро пожаловать, {hbold(message.from_user.full_name)}!\n'
-                         f'Напишите токен для доступа.', reply_markup=keyboard)
+                         f'Введите токен для входа.', reply_markup=keyboard)
     await state.set_state(StepsForm.GET_TOKEN)
 
 
-async def get_enter_token(message: Message, state: FSMContext):
+async def get_token(message: Message, state: FSMContext):
     await state.update_data(token=message.text)
     context_data = await state.get_data()
     token = context_data.get('token')
@@ -36,7 +38,7 @@ async def get_enter_token(message: Message, state: FSMContext):
         await message.answer(f'Добро пожаловать на склад!')
         await state.clear()
     else:
-        await message.answer(f'Неправильный токен, попробуйте еще раз.')
+        await message.answer(f'Неверный токен, попробуйте еще раз.')
 
 
 async def get_help(message: Message):
@@ -45,7 +47,7 @@ async def get_help(message: Message):
                          f'То есть, если на складе уже есть товар с кодом: 123, и его количество: 10, '
                          f'добавив товар с таким же кодом: 123, в количестве: 5, в базе будет количество: 15.\n'
                          f'<b>2) /list:</b> Выводит весь список товаров.\n'
-                         f'<b>3) /withdrawal:</b> Вывод товара со склада по коду. '
+                         f'<b>3) /withdraw:</b> Вывод товара со склада по коду. '
                          f'Нужно указать код и количество товара. Если количество равно нулю, '
                          f'то он удаляеться со склада.\n'
                          f'<b>4) /file:</b> Отправит файл Excel, где весь список товаров на складе.')

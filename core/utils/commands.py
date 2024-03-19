@@ -17,7 +17,7 @@ async def set_commands(bot: Bot):
             description='Список всех товаров',
         ),
         BotCommand(
-            command='withdrawal',
+            command='withdraw',
             description='Вывод товара',
         ),
         BotCommand(

@@ -1,5 +1,6 @@
 from decouple import config
 from typing import Dict, Any, Callable, Awaitable
+
 from aiogram import BaseMiddleware, Bot
 from aiogram.types import Message
 from aiogram.dispatcher.flags import get_flag
